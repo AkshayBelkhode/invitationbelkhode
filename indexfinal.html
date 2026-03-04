@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amrut Mahोत्सव Invitation - Final</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --cream: #fffdf5;
+            --deep-gold: #b8860b;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            font-family: 'Noto Sans Devanagari', 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 40px;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 0;
+        }
+
+        /* FIRST PAGE (from index.html) */
+        .invitation-card {
+            width: 600px;
+            height: 800px;
+            background-color: var(--cream);
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            border: 12px solid #fff;
+            overflow: hidden;
+            text-align: center;
+            color: #4a3728;
+        }
+
+        .gold-border {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid var(--gold);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .corner-decoration {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            z-index: 20;
+        }
+
+        .top-left { top: -5px; left: -5px; border-top: 5px solid var(--gold); border-left: 5px solid var(--gold); }
+        .top-right { top: -5px; right: -5px; border-top: 5px solid var(--gold); border-right: 5px solid var(--gold); }
+        .bottom-left { bottom: -5px; left: -5px; border-bottom: 5px solid var(--gold); border-left: 5px solid var(--gold); }
+        .bottom-right { bottom: -5px; right: -5px; border-bottom: 5px solid var(--gold); border-right: 5px solid var(--gold); }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 30;
+            padding: 40px 30px;
+        }
+
+        .marathi-calligraphy {
+            font-size: 2.2rem;
+            color: var(--deep-gold);
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .shree {
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .sub-heading {
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #b8860b, #d4af37, #b8860b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .photo-frame-main {
+            width: 160px;
+            height: 160px;
+            margin: 20px auto;
+            border-radius: 50%;
+            border: 4px solid var(--gold);
+            box-shadow: 0 0 15px var(--gold);
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .honoree-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2d1e12;
+            margin: 5px 0;
+        }
+
+        /* SECOND PAGE (slide 2 from index2.html) */
+        .slide-container {
+            background-color: #fffdf5;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            height: 800px;
+            width: 600px;
+            justify-content: flex-start;
+            overflow: hidden;
+            padding: 40px;
+            position: relative;
+            border: 10px solid #fff;
+        }
+
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: 15px; left: 15px; right: 15px; bottom: 15px;
+            border: 2px solid #d4af37;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .corner-floral {
+            position: absolute;
+            width: 150px;
+            z-index: 5;
+            opacity: 0.7;
+        }
+
+        .corner-floral.top-left { top: 0; left: 0; }
+        .corner-floral.top-right { top: 0; right: 0; transform: scaleX(-1); }
+        .corner-floral.bottom-left { bottom: 0; left: 0; transform: scaleY(-1); }
+        .corner-floral.bottom-right { bottom: 0; right: 0; transform: scale(-1); }
+
+        .content-area {
+            position: relative;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .section {
+            width: 100%;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .section-header {
+            color: #b8860b;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .section-header::before,
+        .section-header::after {
+            content: '';
+            height: 1px;
+            background: #d4af37;
+            flex-grow: 1;
+        }
+
+        .names-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px 15px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .names-list {
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .event-details {
+            background: rgba(107, 29, 29, 0.05);
+            border: 1px solid #6b1d1d33;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        .family-welcome {
+            margin-top: 10px;
+            border-top: 1px solid #d4af37;
+            padding-top: 10px;
+            font-weight: 700;
+            color: #6b1d1d;
+        }
+
+        .note-box {
+            font-size: 10px;
+            color: #888;
+            margin-top: 10px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: FROM index.html (main invitation card) -->
+    <div class="invitation-card">
+        <div class="gold-border"></div>
+        <div class="corner-decoration top-left"></div>
+        <div class="corner-decoration top-right"></div>
+        <div class="corner-decoration bottom-left"></div>
+        <div class="corner-decoration bottom-right"></div>
+
+        <div class="content-wrapper">
+            <div class="shree">॥ श्री ॥</div>
+            <div class="marathi-calligraphy">सस्नेह निमंत्रण</div>
+            <div class="sub-heading">|| अमृत महोत्सव वाढदिवस सोहळा ||</div>
+            <p class="text-[10px] mt-4 leading-relaxed">
+                आमचे लाडके बाबा-आई, आजोबा-आजी यांच्या अमृत महोत्सवास आपली उपस्थिती प्रार्थनीय आहे.
+            </p>
+
+            <div class="photo-frame-main">
+                <img src="./_DSC8134.JPG"
+                     alt="दांपत्य फोटो"
+                     style="width: 100%; height: 100%; object-fit: cover; object-position: center 5%; transform: translateY(-10px) scale(1.45); transform-origin: center;">
+            </div>
+
+            <div class="honoree-name">श्री. भैयाजी रामचंद्रराव बेलखोडे</div>
+            <div class="text-sm font-bold">आणि</div>
+            <div class="honoree-name">सौ. रमाबाई भैयाजी बेलखोडे</div>
+
+            <div class="mt-6 border-t border-b border-gold-200 py-4">
+                <p class="text-xs"><b>दिनांक :</b> रविवार, २३ मार्च २०२६</p>
+                <p class="text-xs"><b>वेळ :</b> सायं. ६.०० वा. पासून</p>
+                <p class="text-xs"><b>स्थळ :</b> कान्होजी हॉल, मनीष नगर, नागपूर</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: FROM index2.html (slide 2 - details & family) -->
+    <div class="slide-container" id="slide2">
+        <div class="content-area">
+            <div class="section">
+                <div class="section-header">उपस्थित मान्यवर</div>
+                <div class="names-list">
+                    भाऊसाहेब भुटे (वर्धा) • धनराजजी आष्टणकर (गुमगाव) • भाऊरावजी कामड (पालोरा)
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">आयोजक</div>
+                <div class="names-grid">
+                    <div>सौ. डॉ. शक्यु – श्री. विक्रम म. बेलखोडे</div>
+                    <div>डॉ. भाग्यश्री – श्री. योगेंद्र ब. वरडकर</div>
+                    <div>सौ. स्नेहा – श्री. अक्षय रि. बेलखोडे</div>
+                    <div>सौ. युगा – श्री. स्वप्नीक सु. अगळे</div>
+                    <div>सौ. दामिनी – श्री. संकेत कि. आंबटकर</div>
+                    <div>सौ. प्रियंका – श्री. हर्ष कि. आंबटकर</div>
+                </div>
+                <div class="text-[11px] mt-2 font-bold text-amber-900">तसेच</div>
+                <div class="text-[11px]">
+                    डॉ. शिवानी, वेदिका, मनीष, ईरा, श्रीनika, आर्या, एकांश, माहेश्वरी
+                </div>
+            </div>
+
+            <div class="event-details">
+                <div class="font-bold text-red-900 text-sm mb-1">|| कार्यक्रम : सत्कार व स्नेहभोजन ||</div>
+                <div class="text-xs">
+                    <b>दिनांक :</b> रविवार, २३ मार्च ۲۰२६<br>
+                    <b>वेळ :</b> सायं. ६.०० वा. पासून
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">स्थळ</div>
+                <div class="font-bold text-sm">काचोरे lawn,</div>
+                <div class="text-xs">मनीष नगर, नागपूर</div>
+            </div>
+
+            <div class="section">
+                <div class="section-header">मार्गदर्शक</div>
+                <div class="names-grid">
+                    <div>सौ. शोभाताई – श्री. मु. बेलखोडे</div>
+                    <div>श्री. डॉ. अशोक वा. बेलखोडे</div>
+                    <div>सौ. चित्राताई – श्री. रि. बेलखोडे</div>
+                    <div>सौ. शोभाताई – श्री. के. बेलखोडे</div>
+                    <div>सौ. सुनंदाताई – श्री. र. बेलखोडे</div>
+                    <div>सौ. सुरेखा – श्री. कि. आंबटकर</div>
+                    <div style="grid-column: span 2;">सौ. योगीनी – श्री. ज्ञानेश्वर सं. मुडे</div>
+                </div>
+            </div>
+
+            <div class="family-welcome">
+                <div class="text-xs">सर्व भाऊ, भाच्या, नातू-नातीन व समस्त बेलखोडे परिवार</div>
+                <div class="text-sm">आपले सहर्ष स्वागत करीत आहे.</div>
+            </div>
+
+            <div class="note-box">
+                <b>टीप :</b> कान्होजी हॉल हे स्थळ उज्ज्वलनगर अंडरपासपासून सुमारे २ किमी अंतरावर आहे.
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
