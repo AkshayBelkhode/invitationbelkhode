@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>सहस्रचंद्रदर्शन सोहळा आमंत्रण</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/AkshayBelkhode/invitationbelkhode/main/_dsc8134.jpg">
     <img href="https://raw.githubusercontent.com/AkshayBelkhode/invitationbelkhode/main/_dsc8134.jpg?family=Poppins:wght@300;400;600;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -381,4 +382,28 @@
     </div>
 
 </body>
+    <script>
+window.onload = function() {
+
+    setTimeout(function() {
+
+        var duration = 3 * 1000;
+        var end = Date.now() + duration;
+
+        (function frame() {
+            confetti({
+                particleCount: 6,
+                angle: 90,
+                spread: 100,
+                origin: { x: Math.random(), y: 0 }
+            });
+
+            if (Date.now() < end) {
+                requestAnimationFrame(frame);
+            }
+        }());
+
+    }, 2000); // 2 seconds delay
+};
+</script>
 </html>
