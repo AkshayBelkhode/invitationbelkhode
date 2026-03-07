@@ -387,24 +387,32 @@
 
 <script>
 
-window.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
 
     const music = document.getElementById("bgMusic");
 
-    const startMusic = () => {
+    function startMusic(){
         music.play().catch(()=>{});
-        document.removeEventListener("click", startMusic);
-        document.removeEventListener("scroll", startMusic);
-    };
 
-    // try autoplay
+        // remove listeners after music starts
+        window.removeEventListener("scroll", startMusic);
+        document.removeEventListener("click", startMusic);
+        document.removeEventListener("touchstart", startMusic);
+        document.removeEventListener("pointerdown", startMusic);
+    }
+
+    // try autoplay first
     music.play().catch(()=>{});
 
-    // fallback triggers
+    // fallback interactions
+    window.addEventListener("scroll", startMusic);
     document.addEventListener("click", startMusic);
-    document.addEventListener("scroll", startMusic);
+    document.addEventListener("touchstart", startMusic);
+    document.addEventListener("pointerdown", startMusic);
 
 });
+   
+    //Animation event
 
 function launchConfetti(){
 
