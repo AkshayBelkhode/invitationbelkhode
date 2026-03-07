@@ -382,28 +382,26 @@
     </div>
 
 </body>
-    <script>
-window.onload = function() {
+  <script>
 
-    setTimeout(function() {
+function launchConfetti(){
 
-        var duration = 3 * 1000;
-        var end = Date.now() + duration;
+    confetti({
+        particleCount: 120,
+        spread: 120,
+        startVelocity: 45,
+        origin: { y: 0 },
+        colors: ['FFD700','#C0C0C0','#ff0000','#ffcc00','#00ffcc','#ff66ff','#00aaff','#ffaa00','#FF5733',  // bright red
+            '#FFCC00',  // yellow
+            '#00CFFF',  // blue
+            '#FF66FF',  // pink
+            '#4CAF50']
+    });
 
-        (function frame() {
-            confetti({
-                particleCount: 6,
-                angle: 90,
-                spread: 100,
-                origin: { x: Math.random(), y: 0 }
-            });
+}
 
-            if (Date.now() < end) {
-                requestAnimationFrame(frame);
-            }
-        }());
+// run every 2 seconds
+setInterval(launchConfetti, 2000);
 
-    }, 2000); // 2 seconds delay
-};
 </script>
 </html>
