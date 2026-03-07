@@ -380,18 +380,27 @@
             </div>
         </div>
     </div>
-<audio id="bgMusic" autoplay loop>
+
+<audio id="bgMusic" autoplay loop preload="auto">
     <source src="https://raw.githubusercontent.com/AkshayBelkhode/invitationbelkhode/main/music.mp3" type="audio/mpeg">
 </audio>
-    <script>
-window.addEventListener("load", function () {
+
+<script>
+window.addEventListener("DOMContentLoaded", function () {
+
     const music = document.getElementById("bgMusic");
 
-    music.play().catch(() => {
-        console.log("Autoplay blocked by browser");
-    });
+    const playMusic = () => {
+        music.play().catch(() => {});
+        document.removeEventListener("click", playMusic);
+    };
+
+    playMusic(); // try autoplay
+    document.addEventListener("click", playMusic); // fallback if blocked
+
 });
 </script>
+    
 </body>
   <script>
 
