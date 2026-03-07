@@ -387,15 +387,13 @@
 function launchConfetti(){
 
     confetti({
-        particleCount: 120,
-        spread: 120,
-        startVelocity: 45,
-        origin: { y: 0 },
-        colors: ['FFD700','#C0C0C0','#ff0000','#ffcc00','#00ffcc','#ff66ff','#00aaff','#ffaa00','#FF5733',  // bright red
-            '#FFCC00',  // yellow
-            '#00CFFF',  // blue
-            '#FF66FF',  // pink
-            '#4CAF50']
+  particleCount: 150,
+        spread: 140,
+        startVelocity: 35,
+        gravity: 0.8,
+        ticks: 300,
+        origin: { x: Math.random(), y: -0.1 },
+        colors: ['FFD700','#C0C0C0','#ff0000','#ffcc00','#00ffcc','#ff66ff','#00aaff','#ffaa00','#FF5733','#FFCC00','#00CFFF','#FF66FF','#4CAF50']
     });
 
 }
