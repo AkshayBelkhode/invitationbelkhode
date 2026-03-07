@@ -386,23 +386,25 @@
 </audio>
 
 <script>
+
 window.addEventListener("DOMContentLoaded", function () {
 
     const music = document.getElementById("bgMusic");
 
-    const playMusic = () => {
-        music.play().catch(() => {});
-        document.removeEventListener("click", playMusic);
+    const startMusic = () => {
+        music.play().catch(()=>{});
+        document.removeEventListener("click", startMusic);
+        document.removeEventListener("scroll", startMusic);
     };
 
-    playMusic(); // try autoplay
-    document.addEventListener("click", playMusic); // fallback if blocked
+    // try autoplay
+    music.play().catch(()=>{});
+
+    // fallback triggers
+    document.addEventListener("click", startMusic);
+    document.addEventListener("scroll", startMusic);
 
 });
-</script>
-    
-</body>
-  <script>
 
 function launchConfetti(){
 
@@ -413,7 +415,7 @@ function launchConfetti(){
         gravity: 0.8,
         ticks: 300,
         origin: { x: Math.random(), y: -0.1 },
-        colors: ['FFD700','#C0C0C0','#ff0000','#ffcc00','#00ffcc','#ff66ff','#00aaff','#ffaa00','#FF5733','#FFCC00','#00CFFF','#FF66FF','#4CAF50']
+        colors: ['#FFD700','#C0C0C0','#ff0000','#ffcc00','#00ffcc','#ff66ff','#00aaff','#ffaa00','#FF5733','#FFCC00','#00CFFF','#FF66FF','#4CAF50']
     });
 
 }
@@ -422,4 +424,6 @@ function launchConfetti(){
 setInterval(launchConfetti, 2000);
 
 </script>
+</body>
+  
 </html>
