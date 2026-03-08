@@ -273,6 +273,43 @@
                 font-size: 9px;
             }
         }
+        /* ── Music Icon ── */
+.music-icon {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 50;
+    width: 28px;
+    height: 28px;
+    background: rgba(212, 175, 55, 0.15);
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 6px rgba(212,175,55,0.2);
+}
+
+.music-icon .note {
+    font-size: 13px;
+    line-height: 1;
+    display: inline-block;
+    animation: none;
+    opacity: 0.4;
+}
+
+.music-icon .note.playing {
+    animation: noteSpin 1.8s ease-in-out infinite;
+    opacity: 1;
+}
+
+@keyframes noteSpin {
+    0%   { transform: rotate(-15deg) scale(1);    }
+    25%  { transform: rotate(10deg)  scale(1.15); }
+    50%  { transform: rotate(-10deg) scale(1);    }
+    75%  { transform: rotate(12deg)  scale(1.1);  }
+    100% { transform: rotate(-15deg) scale(1);    }
+}
     </style>
 </head>
 <body>
@@ -284,7 +321,11 @@
         <div class="corner-decoration top-right"></div>
         <div class="corner-decoration bottom-left"></div>
         <div class="corner-decoration bottom-right"></div>
-
+        <!-- Music Icon inside card border -->
+        <div class="music-icon" id="musicIcon">
+            <span class="note" id="musicNote">🎵</span>
+        </div>
+        
         <div class="content-wrapper">
             <div class="shree">॥ श्री गणेशाय नमः ॥</div>
             <div class="marathi-calligraphy">सस्नेह निमंत्रण</div>
@@ -384,14 +425,11 @@
 
 <audio id="bgMusic" loop preload="auto" playsinline webkit-playsinline x-webkit-airplay="allow">
     <source src="https://akshaybelkhode.github.io/invitationbelkhode/music.mp3" type="audio/mpeg">
-    <source src="https://akshaybelkhode.github.io/invitationbelkhode/music.mp3" type="audio/mp3">
 </audio>
 
 <script>
 
 const music = document.getElementById("bgMusic");
-
-// Force load on Android (Android often ignores preload="auto")
 music.load();
 
 let musicStarted = false;
@@ -400,7 +438,6 @@ function startMusic() {
     if (musicStarted) return;
     musicStarted = true;
 
-    // Android requires .load() before .play() after a user gesture
     music.load();
     music.currentTime = 0;
 
@@ -408,21 +445,20 @@ function startMusic() {
     if (playPromise !== undefined) {
         playPromise.then(() => {
             console.log("Music playing");
+            document.getElementById('musicNote').classList.add('playing');
         }).catch((e) => {
             console.log("Audio blocked, retrying...", e);
-            // Retry once more after a short delay (helps on some Android browsers)
             setTimeout(() => {
-                music.play().catch(err => console.log("Retry failed:", err));
+                music.play().then(() => {
+                    document.getElementById('musicNote').classList.add('playing');
+                }).catch(err => console.log("Retry failed:", err));
             }, 300);
         });
     }
 }
 
-// Use touchend (not touchstart) — Android Chrome requires gesture to COMPLETE before audio unlocks
 document.addEventListener("touchend", startMusic, { once: true });
 document.addEventListener("click", startMusic, { once: true });
-
-// Extra fallback: unlock on first scroll (some Android browsers allow this)
 document.addEventListener("scroll", startMusic, { once: true });
 
     
