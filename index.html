@@ -381,31 +381,31 @@
         </div>
     </div>
 
-<audio id="bgMusic" autoplay loop preload="auto">
-    <source src="https://raw.githubusercontent.com/AkshayBelkhode/invitationbelkhode/main/music.mp3" type="audio/mpeg">
+<audio id="bgMusic" loop preload="auto">
+  <source src="https://raw.githubusercontent.com/AkshayBelkhode/invitationbelkhode/main/music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-
 document.addEventListener("DOMContentLoaded", function () {
 
     const music = document.getElementById("bgMusic");
 
-    function startMusic(){
-        music.play().catch(()=>{});
+    function startMusic() {
 
-        // remove listeners after music starts
-        window.removeEventListener("scroll", startMusic);
+        music.muted = false;
+        music.play().then(() => {
+            console.log("Music started");
+        }).catch(err => {
+            console.log("Play blocked:", err);
+        });
+
+        // remove listeners after first interaction
         document.removeEventListener("click", startMusic);
         document.removeEventListener("touchstart", startMusic);
         document.removeEventListener("pointerdown", startMusic);
     }
 
-    // try autoplay first
-    music.play().catch(()=>{});
-
-    // fallback interactions
-    window.addEventListener("scroll", startMusic);
+    // wait for first user interaction
     document.addEventListener("click", startMusic);
     document.addEventListener("touchstart", startMusic);
     document.addEventListener("pointerdown", startMusic);
@@ -428,8 +428,8 @@ function launchConfetti(){
 
 }
 
-// run every 2 seconds
-setInterval(launchConfetti, 2000);
+// run every 0.5 seconds
+setInterval(launchConfetti, 500);
 
 </script>
 </body>
