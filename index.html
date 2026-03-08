@@ -381,37 +381,29 @@
         </div>
     </div>
 
-<audio id="bgMusic" loop preload="auto">
-  <source src="https://raw.githubusercontent.com/AkshayBelkhode/invitationbelkhode/main/music.mp3" type="audio/mpeg">
+<audio id="bgMusic" loop preload="auto" playsinline>
+<source src="https://akshaybelkhode.github.io/invitationbelkhode/music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+const music = document.getElementById("bgMusic");
 
-    const music = document.getElementById("bgMusic");
+function startMusic() {
 
-    function startMusic() {
+    music.currentTime = 0;
 
-        music.muted = false;
-        music.play().then(() => {
-            console.log("Music started");
-        }).catch(err => {
-            console.log("Play blocked:", err);
-        });
+    music.play().then(() => {
+        console.log("Music playing");
+    }).catch((e) => {
+        console.log("Audio blocked", e);
+    });
 
-        // remove listeners after first interaction
-        document.removeEventListener("click", startMusic);
-        document.removeEventListener("touchstart", startMusic);
-        document.removeEventListener("pointerdown", startMusic);
-    }
+    document.removeEventListener("touchstart", startMusic);
+    document.removeEventListener("click", startMusic);
+}
 
-    // wait for first user interaction
-    document.addEventListener("click", startMusic);
-    document.addEventListener("touchstart", startMusic);
-    document.addEventListener("pointerdown", startMusic);
-
-});
-   
+document.addEventListener("touchstart", startMusic, { once: true });
+document.addEventListener("click", startMusic, { once: true });
     //Animation event
 
 function launchConfetti(){
