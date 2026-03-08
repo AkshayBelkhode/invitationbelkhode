@@ -381,29 +381,51 @@
         </div>
     </div>
 
-<audio id="bgMusic" loop preload="auto" playsinline>
-<source src="https://akshaybelkhode.github.io/invitationbelkhode/music.mp3" type="audio/mpeg">
+
+<audio id="bgMusic" loop preload="auto" playsinline webkit-playsinline x-webkit-airplay="allow">
+    <source src="https://akshaybelkhode.github.io/invitationbelkhode/music.mp3" type="audio/mpeg">
+    <source src="https://akshaybelkhode.github.io/invitationbelkhode/music.mp3" type="audio/mp3">
 </audio>
 
 <script>
+
 const music = document.getElementById("bgMusic");
 
-function startMusic() {
+// Force load on Android (Android often ignores preload="auto")
+music.load();
 
+let musicStarted = false;
+
+function startMusic() {
+    if (musicStarted) return;
+    musicStarted = true;
+
+    // Android requires .load() before .play() after a user gesture
+    music.load();
     music.currentTime = 0;
 
-    music.play().then(() => {
-        console.log("Music playing");
-    }).catch((e) => {
-        console.log("Audio blocked", e);
-    });
-
-    document.removeEventListener("touchstart", startMusic);
-    document.removeEventListener("click", startMusic);
+    const playPromise = music.play();
+    if (playPromise !== undefined) {
+        playPromise.then(() => {
+            console.log("Music playing");
+        }).catch((e) => {
+            console.log("Audio blocked, retrying...", e);
+            // Retry once more after a short delay (helps on some Android browsers)
+            setTimeout(() => {
+                music.play().catch(err => console.log("Retry failed:", err));
+            }, 300);
+        });
+    }
 }
 
-document.addEventListener("touchstart", startMusic, { once: true });
+// Use touchend (not touchstart) — Android Chrome requires gesture to COMPLETE before audio unlocks
+document.addEventListener("touchend", startMusic, { once: true });
 document.addEventListener("click", startMusic, { once: true });
+
+// Extra fallback: unlock on first scroll (some Android browsers allow this)
+document.addEventListener("scroll", startMusic, { once: true });
+
+    
     //Animation event
 
 function launchConfetti(){
